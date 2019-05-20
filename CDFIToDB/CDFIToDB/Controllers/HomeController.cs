@@ -52,22 +52,151 @@ namespace CDFIToDB.Controllers
 
 
             HtmlDocument doc = new HtmlDocument();
-            doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\ProodFloorCSharpp\ProdFloor\wwwroot\AppData\Steps.xml");
+            doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\ProodFloorCSharpp\ProdFloor\wwwroot\AppData\CFDIV33_0.xml");
 
             var XMLobs = doc.DocumentNode.SelectNodes("//step");
 
             foreach (var XMLob in XMLobs)
             {
-                var stepid = XMLob.SelectSingleNode(".//stepid").InnerText;
-                var jobtypeid = XMLob.SelectSingleNode(".//jobtypeid").InnerText;
-                var stage = XMLob.SelectSingleNode(".//stage").InnerText;
-                var expectedtime = XMLob.SelectSingleNode(".//expectedtime").InnerText;
-                var description = XMLob.SelectSingleNode(".//description").InnerText;
-                var order = XMLob.SelectSingleNode(".//order").InnerText;
+                //CDFI:Comprobante
+                var lugarexpedicioncomprobante = XMLob.SelectSingleNode(".//lugarexpedicioncomprobante").InnerText;
+                var metododepagocomprobante = XMLob.SelectSingleNode(".//metododepagocomprobante").InnerText;
+                var tipodecomprobante = XMLob.SelectSingleNode(".//tipodecomprobante").InnerText;
+                var motivodescuentocomprobante = XMLob.SelectSingleNode(".//motivodescuentocomprobante").InnerText;
+                var descuentocomprobante = XMLob.SelectSingleNode(".//descuentocomprobante").InnerText;
+                var totalcomprobante = XMLob.SelectSingleNode(".//totalcomprobante").InnerText;
+                var subtotalcomprobante = XMLob.SelectSingleNode(".//subtotalcomprobante").InnerText;
+                var certificadocomprobante = XMLob.SelectSingleNode(".//certificadocomprobante").InnerText;
+                var noCertificadocomprobante = XMLob.SelectSingleNode(".//noCertificadocomprobante").InnerText;
+                var sellocomprobante = XMLob.SelectSingleNode(".//sellocomprobante").InnerText;
+                var fechacomprobante = XMLob.SelectSingleNode(".//fechacomprobante").InnerText;
+                var formadepagocomprobante = XMLob.SelectSingleNode(".//formadepagocomprobante").InnerText;
+                var foliocomprobante = XMLob.SelectSingleNode(".//foliocomprobante").InnerText;
+                var seriecomprobante = XMLob.SelectSingleNode(".//seriecomprobante").InnerText;
+                var versioncomprobante = XMLob.SelectSingleNode(".//versioncomprobante").InnerText;
 
+                //CDFI:Emisor
+                var nombreemisor = XMLob.SelectSingleNode(".//nombreemisor").InnerText;
+                var rfcemisor = XMLob.SelectSingleNode(".//rfcemisor").InnerText;
+                var regimenEmisor = XMLob.SelectSingleNode(".//regimenEmisor").InnerText;
+
+                //CDFI:Receptor
+                var nombrereceptor = XMLob.SelectSingleNode(".//nombrereceptor").InnerText;
+                var rfcreceptor = XMLob.SelectSingleNode(".//rfcreceptor").InnerText;
+
+                //CDFI:Conceptos
+                var importeconceptos = XMLob.SelectSingleNode(".//importeconceptos").InnerText;
+                var valorunitarioconceptos = XMLob.SelectSingleNode(".//valorunitarioconceptos").InnerText;
+                var descripcionconceptos = XMLob.SelectSingleNode(".//descripcionconceptos").InnerText;
+                var unidadconceptos = XMLob.SelectSingleNode(".//unidadconceptos").InnerText;
+                var cantidadconceptos = XMLob.SelectSingleNode(".//cantidadconceptos").InnerText;
+
+                //CDFI:Impuestos
+                var totalimpuestostrasladados = XMLob.SelectSingleNode(".//totalimpuestostrasladados").InnerText;
+                var totalimpuestosreteneidos = XMLob.SelectSingleNode(".//totalimpuestosreteneidos").InnerText;
+                var importeretecionesimpuestos = XMLob.SelectSingleNode(".//importeretecionesimpuestos").InnerText;
+                var impuestoretencionesimpuestos = XMLob.SelectSingleNode(".//impuestoretencionesimpuestos").InnerText;
+
+                //CDFI:Complemento
+                //Nomina: nomina
+                var salariodiariointegradonomina = XMLob.SelectSingleNode(".//salariodiariointegradonomina").InnerText;
+                var riesgopuestonomina = XMLob.SelectSingleNode(".//riesgopuestonomina").InnerText;
+                var salariobasecotapornomina = XMLob.SelectSingleNode(".//salariobasecotapornomina").InnerText;
+                var periodicidadpagonomina = XMLob.SelectSingleNode(".//periodicidadpagonomina").InnerText;
+                var tipojornadanomina = XMLob.SelectSingleNode(".//tipojornadanomina").InnerText;
+                var tipocontratonomina = XMLob.SelectSingleNode(".//tipocontratonomina").InnerText;
+                var puestonomina = XMLob.SelectSingleNode(".//puestonomina").InnerText;
+                var antiguedadnomina = XMLob.SelectSingleNode(".//antiguedadnomina").InnerText;
+                var fechainicioreallaboralnomina = XMLob.SelectSingleNode(".//fechainicioreallaboralnomina").InnerText;
+                var departamentonomina = XMLob.SelectSingleNode(".//departamentonomina").InnerText;
+                var numdiaspagadosnomina = XMLob.SelectSingleNode(".//numdiaspagadosnomina").InnerText;
+                var fechafinalpagonomina = XMLob.SelectSingleNode(".//fechafinalpagonomina").InnerText;
+                var fechainicialpagonomina = XMLob.SelectSingleNode(".//fechainicialpagonomina").InnerText;
+                var fechapagonomina = XMLob.SelectSingleNode(".//fechapagonomina").InnerText;
+                var numsegurosocialnomina = XMLob.SelectSingleNode(".//numsegurosocialnomina").InnerText;
+                var tiporegimennomina = XMLob.SelectSingleNode(".//tiporegimennomina").InnerText;
+                var curpnomina = XMLob.SelectSingleNode(".//curpnomina").InnerText;
+                var numempleadonomina = XMLob.SelectSingleNode(".//numempleadonomina").InnerText;
+                var registropatronalnomina = XMLob.SelectSingleNode(".//registropatronalnomina").InnerText;
+                var versionnomina = XMLob.SelectSingleNode(".//versionnomina").InnerText;
+
+                //Nomina:Percepciones
+                var totalexentopercepciones = XMLob.SelectSingleNode(".//totalexentopercepciones").InnerText;
+                var totalgravadopercepciones = XMLob.SelectSingleNode(".//totalgravadopercepciones").InnerText;
+                var importeexentopercepciones = XMLob.SelectSingleNode(".//importeexentopercepciones").InnerText;
+                var importegravadopercepciones = XMLob.SelectSingleNode(".//importegravadopercepciones").InnerText;
+                var conceptopercepciones = XMLob.SelectSingleNode(".//conceptopercepciones").InnerText;
+                var clavepercepciones = XMLob.SelectSingleNode(".//clavepercepciones").InnerText;
+                var tipopercepcion = XMLob.SelectSingleNode(".//tipopercepcion").InnerText;
+
+                //UUID
+                var uuid = XMLob.SelectSingleNode(".//uuid").InnerText;
                 context.CDFIs.Add(new CDFI
                 {
-                    
+                    LugarExpedicionComprobante = lugarexpedicioncomprobante,
+                    MetodoDePagoComprobante = metododepagocomprobante,
+                    TipoDeComprobante = tipodecomprobante,
+                    MotivoDescuentoComprobante = motivodescuentocomprobante,
+                    DescuentoComprobante = descuentocomprobante,
+                    TotalComprobante = totalcomprobante,
+                    SubtotalComprobante = subtotalcomprobante,
+                    CertificadoComprobante = certificadocomprobante,
+                    NoCertificadoComprobante = noCertificadocomprobante,
+                    SelloComprobante = sellocomprobante,
+                    FechaComprobante = fechacomprobante,
+                    FormaDePagoComprobante = formadepagocomprobante,
+                    FolioComprobante = foliocomprobante,
+                    SerieComprobante = seriecomprobante,
+                    VersionComprobante = versioncomprobante,
+
+                    NombreEmisor = nombreemisor,
+                    RFCEmisor = rfcemisor,
+                    RegimenEmisor = regimenEmisor,
+
+                    NombreReceptor = nombrereceptor,
+                    RFCReceptor = rfcreceptor,
+
+                    ImporteConceptos = importeconceptos,
+                    ValorUnitarioConceptos = valorunitarioconceptos,
+                    DescripcionConceptos = descripcionconceptos,
+                    UnidadConceptos = unidadconceptos,
+                    CantidadConceptos = cantidadconceptos,
+
+                    TotalImpuestosTrasladados = totalimpuestostrasladados,
+                    TotalImpuestosReteneidos = totalimpuestosreteneidos,
+                    ImporteRetecionesImpuestos = importeretecionesimpuestos,
+                    ImpuestoRetencionesImpuestos = importeretecionesimpuestos,
+
+                    SalarioDiarioIntegradoNomina = salariodiariointegradonomina,
+                    RiesgoPuestoNomina = riesgopuestonomina,
+                    SalarioBaseCotAporNomina = salariobasecotapornomina,
+                    PeriodicidadPagoNomina = periodicidadpagonomina,
+                    TipoJornadaNomina = tipojornadanomina,
+                    TipoContratoNomina = tipocontratonomina,
+                    PuestoNomina = puestonomina,
+                    AntiguedadNomina = antiguedadnomina,
+                    FechaInicioRealLaboralNomina = fechainicioreallaboralnomina,
+                    DepartamentoNomina = departamentonomina,
+                    NumDiasPagadosNomina = numdiaspagadosnomina,
+                    FechaInicialPagoNomina = fechainicialpagonomina,
+                    FechaFinalPagoNomina = fechafinalpagonomina,
+                    FechaPagoNomina = fechapagonomina,
+                    NumSeguroSocialNomina= numsegurosocialnomina,
+                    TipoRegimenNomina = tiporegimennomina,
+                    CURPNomina = curpnomina,
+                    NumEmpleadoNomina = numempleadonomina,
+                    RegistroPatronalNomina = registropatronalnomina,
+                    VersionNomina = versionnomina,
+
+                    TotalExentoPercepciones = totalexentopercepciones,
+                    TotalGravadoPercepciones = totalgravadopercepciones,
+                    ImporteExentoPercepciones = importeexentopercepciones,
+                    ImporteGravadoPercepciones = importegravadopercepciones,
+                    ConceptoPercepciones = conceptopercepciones,
+                    ClavePercepciones = clavepercepciones,
+                    TipoPercepcion = tipopercepcion,
+
+                    UUID = uuid
                 });
                 context.Database.OpenConnection();
                 try
