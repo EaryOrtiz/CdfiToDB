@@ -52,29 +52,25 @@ namespace CDFIToDB.Controllers
 
 
             HtmlDocument doc = new HtmlDocument();
-            doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\ProodFloorCSharpp\ProdFloor\wwwroot\AppData\CFDIV33_0.xml");
+            doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_0.xml");
 
-            var XMLobs = doc.DocumentNode.SelectNodes("//step");
-
-            foreach (var XMLob in XMLobs)
-            {
                 //CDFI:Comprobante
-                var lugarexpedicioncomprobante = XMLob.SelectSingleNode(".//lugarexpedicioncomprobante").InnerText;
-                var metododepagocomprobante = XMLob.SelectSingleNode(".//metododepagocomprobante").InnerText;
-                var tipodecomprobante = XMLob.SelectSingleNode(".//tipodecomprobante").InnerText;
-                var motivodescuentocomprobante = XMLob.SelectSingleNode(".//motivodescuentocomprobante").InnerText;
-                var descuentocomprobante = XMLob.SelectSingleNode(".//descuentocomprobante").InnerText;
-                var totalcomprobante = XMLob.SelectSingleNode(".//totalcomprobante").InnerText;
-                var subtotalcomprobante = XMLob.SelectSingleNode(".//subtotalcomprobante").InnerText;
-                var certificadocomprobante = XMLob.SelectSingleNode(".//certificadocomprobante").InnerText;
-                var noCertificadocomprobante = XMLob.SelectSingleNode(".//noCertificadocomprobante").InnerText;
-                var sellocomprobante = XMLob.SelectSingleNode(".//sellocomprobante").InnerText;
-                var fechacomprobante = XMLob.SelectSingleNode(".//fechacomprobante").InnerText;
-                var formadepagocomprobante = XMLob.SelectSingleNode(".//formadepagocomprobante").InnerText;
-                var foliocomprobante = XMLob.SelectSingleNode(".//foliocomprobante").InnerText;
-                var seriecomprobante = XMLob.SelectSingleNode(".//seriecomprobante").InnerText;
-                var versioncomprobante = XMLob.SelectSingleNode(".//versioncomprobante").InnerText;
-
+                var lugarexpedicioncomprobante = doc.DocumentNode.SelectSingleNode("/cfdi:Comprobante/@LugarExpedicion").InnerText;
+                var metododepagocomprobante = doc.DocumentNode.SelectSingleNode(".//metododepago").InnerText;
+                var tipodecomprobante = doc.DocumentNode.SelectSingleNode(".//tipodecomprobante").InnerText;
+                var motivodescuentocomprobante = doc.DocumentNode.SelectSingleNode(".//motivodescuento").InnerText;
+                var descuentocomprobante = doc.DocumentNode.SelectSingleNode(".//descuento").InnerText;
+                var totalcomprobante = doc.DocumentNode.SelectSingleNode(".//totalcomprobante").InnerText;
+                var subtotalcomprobante = doc.DocumentNode.SelectSingleNode(".//subtotal").InnerText;
+                var certificadocomprobante = doc.DocumentNode.SelectSingleNode(".//certificado").InnerText;
+                var noCertificadocomprobante = doc.DocumentNode.SelectSingleNode(".//nocertificado").InnerText;
+                var sellocomprobante = doc.DocumentNode.SelectSingleNode(".//sellocomprobante").InnerText;
+                var fechacomprobante = doc.DocumentNode.SelectSingleNode(".//fecha").InnerText;
+                var formadepagocomprobante = doc.DocumentNode.SelectSingleNode(".//formadepago").InnerText;
+                var foliocomprobante = doc.DocumentNode.SelectSingleNode(".//folio").InnerText;
+                var seriecomprobante = doc.DocumentNode.SelectSingleNode(".//serie").InnerText;
+                var versioncomprobante = doc.DocumentNode.SelectSingleNode(".//version").InnerText;
+            /*
                 //CDFI:Emisor
                 var nombreemisor = XMLob.SelectSingleNode(".//nombreemisor").InnerText;
                 var rfcemisor = XMLob.SelectSingleNode(".//rfcemisor").InnerText;
@@ -198,6 +194,7 @@ namespace CDFIToDB.Controllers
 
                     UUID = uuid
                 });
+                */
                 context.Database.OpenConnection();
                 try
                 {
@@ -210,7 +207,6 @@ namespace CDFIToDB.Controllers
                     context.Database.CloseConnection();
                 }
                 
-            }
 
         }
 
