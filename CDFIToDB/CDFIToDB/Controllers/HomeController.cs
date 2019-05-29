@@ -50,7 +50,7 @@ namespace CDFIToDB.Controllers
         {
             ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
 
-
+            
             XmlDocument doc = new XmlDocument();
             XmlNamespaceManager nameSpace = new XmlNamespaceManager(doc.NameTable);
             doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_0.xml");
@@ -58,6 +58,7 @@ namespace CDFIToDB.Controllers
             nameSpace.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
             nameSpace.AddNamespace("nomina", "http://www.sat.gob.mx/nomina");
 
+            int count = 1;
             //CDFI:Comprobante
             var lugarexpedicioncomprobante = doc.SelectSingleNode("/cfdi:Comprobante/@LugarExpedicion", nameSpace).InnerText;
             var metododepagocomprobante = doc.SelectSingleNode("/cfdi:Comprobante/@metodoDePago", nameSpace).InnerText;
@@ -94,26 +95,26 @@ namespace CDFIToDB.Controllers
             //CDFI:Impuestos
             var totalimpuestostrasladados = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/@totalImpuestosTrasladados", nameSpace).InnerText;
             var totalimpuestosreteneidos = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/@totalImpuestosRetenidos", nameSpace).InnerText;
-            var importeretecionesimpuestos = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/cfdi:Rentenciones/cfdi:Rentencion/@importeretecionesimpuestos", nameSpace).InnerText;
-            var impuestoretencionesimpuestos = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/cfdi:Retenciones/cfdi:Rentencion//@impuestoretencionesimpuestos", nameSpace).InnerText;
+            var importeretecionesimpuestos = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/cfdi:Retenciones/cfdi:Retencion/@importe", nameSpace).InnerText;
+            var impuestoretencionesimpuestos = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/cfdi:Retenciones/cfdi:Retencion//@impuesto", nameSpace).InnerText;
 
             //CDFI:Complemento
             //Nomina: nomina
-            var salariodiariointegradonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@SalariodiarioIntegrado", nameSpace).InnerText;
+            var salariodiariointegradonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@SalarioDiarioIntegrado", nameSpace).InnerText;
             var riesgopuestonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@RiesgoPuesto", nameSpace).InnerText;
             var salariobasecotapornomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@SalarioBaseCotApor", nameSpace).InnerText;
             var periodicidadpagonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@PeriodicidadPago", nameSpace).InnerText;
             var tipojornadanomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@TipoJornada", nameSpace).InnerText;
             var tipocontratonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@TipoContrato", nameSpace).InnerText;
-            var puestonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@PuestoNomina", nameSpace).InnerText;
+            var puestonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@Puesto", nameSpace).InnerText;
             var antiguedadnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@Antiguedad", nameSpace).InnerText;
-            var fechainicioreallaboralnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@FechaInicioRealLaboral", nameSpace).InnerText;
+            var fechainicioreallaboralnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@FechaInicioRelLaboral", nameSpace).InnerText;
             var departamentonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@Departamento", nameSpace).InnerText;
             var numdiaspagadosnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@NumDiasPagados", nameSpace).InnerText;
             var fechafinalpagonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@FechaFinalPago", nameSpace).InnerText;
             var fechainicialpagonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@FechaInicialPago", nameSpace).InnerText;
             var fechapagonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@FechaPago", nameSpace).InnerText;
-            var numsegurosocialnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@NumSeguroSocial", nameSpace).InnerText;
+            var numsegurosocialnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@NumSeguridadSocial", nameSpace).InnerText;
             var tiporegimennomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@TipoRegimen", nameSpace).InnerText;
             var curpnomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@CURP", nameSpace).InnerText;
             var numempleadonomina = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/@NumEmpleado", nameSpace).InnerText;
@@ -123,17 +124,12 @@ namespace CDFIToDB.Controllers
             //Nomina:Percepciones
             var totalexentopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/@TotalExento", nameSpace).InnerText;
             var totalgravadopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/@TotalGravado", nameSpace).InnerText;
-            var importeexentopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/@ImportExento", nameSpace).InnerText;
-
-            var importegravadopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion/@ImporteGravado", nameSpace).InnerText;
-            var conceptopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion/@Concepto", nameSpace).InnerText;
-            var clavepercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion/@Clave", nameSpace).InnerText;
-            var tipopercepcion = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion/@Tipo", nameSpace).InnerText;
 
             //UUID
-            var uuid = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital/@uuid").InnerText;
+            var uuid = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital/@UUID", nameSpace).InnerText;
             context.CDFIs.Add(new CDFI
             {
+                CFDIID = count,
                 LugarExpedicionComprobante = lugarexpedicioncomprobante,
                 MetodoDePagoComprobante = metododepagocomprobante,
                 TipoDeComprobante = tipodecomprobante,
@@ -191,11 +187,6 @@ namespace CDFIToDB.Controllers
 
                 TotalExentoPercepciones = totalexentopercepciones,
                 TotalGravadoPercepciones = totalgravadopercepciones,
-                ImporteExentoPercepciones = importeexentopercepciones,
-                ImporteGravadoPercepciones = importegravadopercepciones,
-                ConceptoPercepciones = conceptopercepciones,
-                ClavePercepciones = clavepercepciones,
-                TipoPercepcion = tipopercepcion,
 
                 UUID = uuid
             });
@@ -210,6 +201,29 @@ namespace CDFIToDB.Controllers
             {
                 context.Database.CloseConnection();
             }
+
+            XmlNodeList percepciones = doc.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion", nameSpace);
+            foreach(XmlNode percepcion in percepciones)
+            {
+                var importeexentopercepciones = percepcion.SelectSingleNode(".//@ImportExento", nameSpace).InnerText;
+                var importegravadopercepciones = percepcion.SelectSingleNode(".//@ImporteGravado", nameSpace).InnerText;
+                var conceptopercepciones = percepcion.SelectSingleNode(".//@Concepto", nameSpace).InnerText;
+                var clavepercepciones = percepcion.SelectSingleNode(".//@Clave", nameSpace).InnerText;
+                var tipopercepcion = percepcion.SelectSingleNode(".//@TipoPercepcion", nameSpace).InnerText;
+
+                context.Percepciones.Add(new Percepcion
+                {
+                    CFDIID = count,
+                    ImporteExentoPercepciones = importeexentopercepciones,
+                    ImporteGravadoPercepciones = importegravadopercepciones,
+                    ConceptoPercepciones = conceptopercepciones,
+                    ClavePercepciones = clavepercepciones,
+                    TipoPercepcion = tipopercepcion,
+                });
+                context.SaveChanges();
+            }
+            count++;
+            
         }
 
         [HttpPost]

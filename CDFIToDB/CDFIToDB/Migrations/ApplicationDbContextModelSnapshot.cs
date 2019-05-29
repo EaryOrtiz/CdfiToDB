@@ -22,7 +22,7 @@ namespace CDFIToDB.Migrations
 
             modelBuilder.Entity("CDFIToDB.Models.CDFI", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CFDIID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AntiguedadNomina");
@@ -32,10 +32,6 @@ namespace CDFIToDB.Migrations
                     b.Property<string>("CantidadConceptos");
 
                     b.Property<string>("CertificadoComprobante");
-
-                    b.Property<string>("ClavePercepciones");
-
-                    b.Property<string>("ConceptoPercepciones");
 
                     b.Property<string>("DepartamentoNomina");
 
@@ -58,10 +54,6 @@ namespace CDFIToDB.Migrations
                     b.Property<string>("FormaDePagoComprobante");
 
                     b.Property<string>("ImporteConceptos");
-
-                    b.Property<string>("ImporteExentoPercepciones");
-
-                    b.Property<string>("ImporteGravadoPercepciones");
 
                     b.Property<string>("ImporteRetecionesImpuestos");
 
@@ -115,8 +107,6 @@ namespace CDFIToDB.Migrations
 
                     b.Property<string>("TipoJornadaNomina");
 
-                    b.Property<string>("TipoPercepcion");
-
                     b.Property<string>("TipoRegimenNomina");
 
                     b.Property<string>("TotalComprobante");
@@ -139,9 +129,31 @@ namespace CDFIToDB.Migrations
 
                     b.Property<string>("VersionNomina");
 
-                    b.HasKey("ID");
+                    b.HasKey("CFDIID");
 
                     b.ToTable("CDFIs");
+                });
+
+            modelBuilder.Entity("CDFIToDB.Models.Percepcion", b =>
+                {
+                    b.Property<int>("PercepcionID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CFDIID");
+
+                    b.Property<string>("ClavePercepciones");
+
+                    b.Property<string>("ConceptoPercepciones");
+
+                    b.Property<string>("ImporteExentoPercepciones");
+
+                    b.Property<string>("ImporteGravadoPercepciones");
+
+                    b.Property<string>("TipoPercepcion");
+
+                    b.HasKey("PercepcionID");
+
+                    b.ToTable("Percepciones");
                 });
 #pragma warning restore 612, 618
         }

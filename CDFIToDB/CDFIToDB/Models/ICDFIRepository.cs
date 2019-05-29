@@ -8,7 +8,12 @@ namespace CDFIToDB.Models
     public interface ICDFIRepository
     {
         IQueryable<CDFI> CDFIs { get;}
+        IQueryable<Percepcion> Percepciones { get; }
+
         void SaveCDFI(CDFI Cdfi);
+        void SavePercepcion(Percepcion percepcion);
+
         CDFI DeleteCDFI(int ID);
+        Percepcion DeletePercepcion(int ID);
     }
 }

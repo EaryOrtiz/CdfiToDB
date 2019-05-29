@@ -15,20 +15,21 @@ namespace CDFIToDB.Models
         }
 
         public IQueryable<CDFI> CDFIs => context.CDFIs;
+        public IQueryable<Percepcion> Percepciones => context.Percepciones;
 
         public void SaveCDFI(CDFI cDFI)
         {
-            if (cDFI.ID == 0)
+            if (cDFI.CFDIID == 0)
             {
                 context.CDFIs.Add(cDFI);
             }
             else
             {
                 CDFI dbEntry = context.CDFIs
-                .FirstOrDefault(p => p.ID == cDFI.ID);
+                .FirstOrDefault(p => p.CFDIID == cDFI.CFDIID);
                 if (dbEntry != null)
                 {
-                    dbEntry.ID = cDFI.ID;
+                    dbEntry.CFDIID = cDFI.CFDIID;
                     dbEntry.LugarExpedicionComprobante = cDFI.LugarExpedicionComprobante;
                     dbEntry.MetodoDePagoComprobante = cDFI.MetodoDePagoComprobante;
                     dbEntry.TipoDeComprobante = cDFI.TipoDeComprobante;
@@ -85,11 +86,6 @@ namespace CDFIToDB.Models
 
                     dbEntry.TotalGravadoPercepciones = cDFI.TotalGravadoPercepciones;
                     dbEntry.TotalExentoPercepciones = cDFI.TotalExentoPercepciones;
-                    dbEntry.ImporteExentoPercepciones = cDFI.ImporteExentoPercepciones;
-                    dbEntry.ImporteGravadoPercepciones = cDFI.ImporteGravadoPercepciones;
-                    dbEntry.ConceptoPercepciones = cDFI.ConceptoPercepciones;
-                    dbEntry.ClavePercepciones = cDFI.ClavePercepciones;
-                    dbEntry.TipoPercepcion = cDFI.TipoPercepcion;
 
                     dbEntry.UUID = cDFI.UUID;
                 }
@@ -97,13 +93,49 @@ namespace CDFIToDB.Models
             context.SaveChanges();
 
         }
+        public void SavePercepcion(Percepcion Percepcion)
+        {
+            if (Percepcion.PercepcionID == 0)
+            {
+                context.Percepciones.Add(Percepcion);
+            }
+            else
+            {
+                Percepcion dbEntry = context.Percepciones
+                .FirstOrDefault(p => p.CFDIID == Percepcion.PercepcionID);
+                if (dbEntry != null)
+                {
+                    dbEntry.CFDIID = Percepcion.CFDIID;
+                    dbEntry.ImporteExentoPercepciones = Percepcion.ImporteExentoPercepciones;
+                    dbEntry.ImporteGravadoPercepciones = Percepcion.ImporteGravadoPercepciones;
+                    dbEntry.ConceptoPercepciones = Percepcion.ConceptoPercepciones;
+                    dbEntry.ClavePercepciones = Percepcion.ClavePercepciones;
+                    dbEntry.TipoPercepcion = Percepcion.TipoPercepcion;
+                }
+            }
+            context.SaveChanges();
+
+        }
+
+
         public CDFI DeleteCDFI(int ID)
         {
             CDFI dbEntry = context.CDFIs
-                .FirstOrDefault(p => p.ID == ID);
+                .FirstOrDefault(p => p.CFDIID == ID);
             if (dbEntry != null)
             {
                 context.CDFIs.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public Percepcion DeletePercepcion(int ID)
+        {
+            Percepcion dbEntry = context.Percepciones
+                .FirstOrDefault(p => p.PercepcionID == ID);
+            if (dbEntry != null)
+            {
+                context.Percepciones.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

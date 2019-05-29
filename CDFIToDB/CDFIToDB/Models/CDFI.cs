@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace CDFIToDB.Models
 {
     public class CDFI
     {
-        public int ID { get; set; }
+        [Key]
+        public int CFDIID { get; set; }
 
         //CDFI:Comprobante
         public string LugarExpedicionComprobante { get; set; }
@@ -74,13 +76,21 @@ namespace CDFIToDB.Models
         //Nomina:Percepciones
         public string TotalExentoPercepciones { get; set; }
         public string TotalGravadoPercepciones { get; set; }
+
+        //UUID
+        public string UUID { get; set; }
+
+        List<Percepcion> _Percepciones { get; set; }
+    }
+
+    public class Percepcion
+    {
+        public int PercepcionID { get; set; }
+        public int CFDIID { get; set; }
         public string ImporteExentoPercepciones { get; set; }
         public string ImporteGravadoPercepciones { get; set; }
         public string ConceptoPercepciones { get; set; }
         public string ClavePercepciones { get; set; }
         public string TipoPercepcion { get; set; }
-
-        //UUID
-        public string UUID { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace CDFIToDB.Models
             : base(options) { }
 
         public DbSet<CDFI> CDFIs { get; set; }
+        public DbSet<Percepcion> Percepciones { get; set; }
     }
 }
