@@ -201,29 +201,34 @@ namespace CDFIToDB.Controllers
             {
                 context.Database.CloseConnection();
             }
-
-            XmlNodeList percepciones = doc.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion", nameSpace);
-            foreach(XmlNode percepcion in percepciones)
+            try
             {
-                var importeexentopercepciones = percepcion.SelectSingleNode(".//@ImportExento", nameSpace).InnerText;
-                var importegravadopercepciones = percepcion.SelectSingleNode(".//@ImporteGravado", nameSpace).InnerText;
-                var conceptopercepciones = percepcion.SelectSingleNode(".//@Concepto", nameSpace).InnerText;
-                var clavepercepciones = percepcion.SelectSingleNode(".//@Clave", nameSpace).InnerText;
-                var tipopercepcion = percepcion.SelectSingleNode(".//@TipoPercepcion", nameSpace).InnerText;
-
-                context.Percepciones.Add(new Percepcion
+                for (int i = 1; i < 15; i++)
                 {
-                    CFDIID = count,
-                    ImporteExentoPercepciones = importeexentopercepciones,
-                    ImporteGravadoPercepciones = importegravadopercepciones,
-                    ConceptoPercepciones = conceptopercepciones,
-                    ClavePercepciones = clavepercepciones,
-                    TipoPercepcion = tipopercepcion,
-                });
-                context.SaveChanges();
+                    var importeexentopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion["+i.ToString()+"]/@ImporteExento", nameSpace).InnerText;
+                    var importegravadopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion["+i.ToString()+"]/@ImporteGravado", nameSpace).InnerText;
+                    var conceptopercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion["+i.ToString()+"]/@Concepto", nameSpace).InnerText;
+                    var clavepercepciones = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion["+i.ToString()+"]/@Clave", nameSpace).InnerText;
+                    var tipopercepcion = doc.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/nomina:Nomina/nomina:Percepciones/nomina:Percepcion["+i.ToString()+"]/@TipoPercepcion", nameSpace).InnerText;
+
+                    context.Percepciones.Add(new Percepcion
+                    {
+                        CFDIID = count,
+                        ImporteExentoPercepciones = importeexentopercepciones,
+                        ImporteGravadoPercepciones = importegravadopercepciones,
+                        ConceptoPercepciones = conceptopercepciones,
+                        ClavePercepciones = clavepercepciones,
+                        TipoPercepcion = tipopercepcion,
+                    });
+                    context.SaveChanges();
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.Print(e.ToString());
             }
             count++;
-            
+
         }
 
         [HttpPost]
