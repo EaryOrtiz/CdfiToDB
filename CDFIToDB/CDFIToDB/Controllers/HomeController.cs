@@ -10,6 +10,7 @@ using System.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using HtmlAgilityPack;
 using Microsoft.EntityFrameworkCore;
+using CDFIToDB.Models.ViewModel;
 
 namespace CDFIToDB.Controllers
 {
@@ -24,7 +25,12 @@ namespace CDFIToDB.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            CFDIViewModel viewModel = new CFDIViewModel()
+            {
+                CDFIs = repository.CDFIs.ToList(),
+                Percepciones = repository.Percepciones.ToList()
+            };
+            return View(viewModel);
         }
 
         public IActionResult About()
@@ -53,7 +59,7 @@ namespace CDFIToDB.Controllers
             
             XmlDocument doc = new XmlDocument();
             XmlNamespaceManager nameSpace = new XmlNamespaceManager(doc.NameTable);
-            doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_0.xml");
+            doc.Load(@"C:\Users\Eary\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_0.xml");
             nameSpace.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
             nameSpace.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
             nameSpace.AddNamespace("nomina", "http://www.sat.gob.mx/nomina");

@@ -1,4 +1,4 @@
-﻿
+﻿@model CDFIToDB.Models.ViewModel.CFDIViewModel
 @{
     ViewBag.Title = "CDFI To DB";
     Layout = "_Layout";
@@ -11,5 +11,107 @@
 <br />
 <br />
 <form asp-action="SeedXML" asp-controller="Home" method="post">
-        <button type="submit" name="buttonImportXML" value="All" class="btn btn-danger btn-sm">Import All Jobs from XML <i class="fas fa-file-alt"></i></button>
+    <button type="submit" name="buttonImportXML" value="All" class="btn btn-danger btn-sm">Import All Jobs from XML <i class="fas fa-file-alt"></i></button>
 </form>
+<br /><br />
+@for (int i = 0; i < Model.CDFIs.Count(); i++)
+{
+    <h3>Nomina #@(i+1)</h3>
+    List<Percepcion> percepcions = Model.Percepciones.Where(m => m.CFDIID == Model.CDFIs[i].CFDIID).ToList();
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Datos Generales</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Nombre de la empresa</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].NombreEmisor" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RFC</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].RFCEmisor" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Razon Social</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].RegimenEmisor" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombre del Empleado</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].NombreReceptor" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RFC</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].RFCReceptor" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CURP</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].CURPNomina" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Lugar</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].LugarExpedicionComprobante" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].FechaComprobante" readonly /></td>
+                      
+                    </tr>
+                    <tr>
+                        <th scope="row">UUID</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].UUID" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Numero de certificado</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].CertificadoComprobante" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Folio</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].FolioComprobante" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sello</th>
+                        <td><input class="form-control" asp-for="CDFIs[i].SelloComprobante" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+              <table class="table table-sm">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th scope="col">Percepciones</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                      </tr>
+                  </thead>
+                    <tbody>
+                        @for (int j = 0; j < percepcions.Count(); j++)
+                        {
+
+                            <tr>
+                                <th scope="row">Concepto #@(j+1)</th>
+                                <td>Clave</td>
+                                <td>Tipo</td>
+                                <td>Importe</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-control" asp-for="@percepcions[j].ConceptoPercepciones" readonly /></th>
+                                <td><input class="form-control" asp-for="@percepcions[j].ClavePercepciones" readonly /></td>
+                                <td><input class="form-control" asp-for="@percepcions[j].TipoPercepcion" readonly /></td>
+                                <td><input  class="form-control" asp-for="@percepcions[j].ImporteExentoPercepciones" readonly /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            
+        </div>
+    </div>
+    <br /><br />
+}
+
