@@ -11,7 +11,10 @@
     </form>
 </div>
 <br /><br />
-<h3>Listado de Nominas</h3>
+@if (Model.CDFIs.Count() > 1)
+{
+    <h3>Listado de Nominas</h3>
+}
 @for (int i = 0; i < Model.CDFIs.Count(); i++)
 {
     <div class="card card-outline-primary m-1 p-1">
