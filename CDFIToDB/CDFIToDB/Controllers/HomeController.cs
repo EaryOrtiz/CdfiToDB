@@ -33,6 +33,24 @@ namespace CDFIToDB.Controllers
             return View(viewModel);
         }
 
+        public ViewResult NominaDetails(int ID)
+        {
+            CDFI dFI = repository.CDFIs.FirstOrDefault(m => m.CFDIID == ID);
+            if(dFI != null)
+            {
+                CFDIViewModel viewModel = new CFDIViewModel()
+                {
+                    CDFI = dFI,
+                    Percepciones = repository.Percepciones.Where(m => m.CFDIID == dFI.CFDIID).ToList()
+                };
+
+                return View(viewModel);
+            }
+
+            TempData["alert"] = "Esa nomina no existeo a ocurrido un error";
+            return View(nameof(Index));
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -67,7 +85,7 @@ namespace CDFIToDB.Controllers
             {
                 try
                 {
-                    doc.Load(@"C:\Users\eary.ortiz\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_" + j.ToString() + ".xml");
+                    doc.Load(@"C:\Users\Eary\Documents\GitHub\CdfiToDB\CDFIToDB\CDFIToDB\wwwroot\AppData\CFDIV33_" + j.ToString() + ".xml");
                 }
                 catch(Exception e)
                 {
@@ -211,6 +229,11 @@ namespace CDFIToDB.Controllers
                     context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.CDFIs ON");
                     context.SaveChanges();
                     context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.CDFIs OFF");
+                }
+                catch(DbUpdateException e)
+                {
+                    context.Database.CloseConnection();
+                    break;
                 }
                 finally
                 {

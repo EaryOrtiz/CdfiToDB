@@ -14,15 +14,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="\">@(ViewBag.Brand == null ? "CDFI To DB" : ViewBag.Brand)</a>
+        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-info">
+            <a class="navbar-brand text-light" href="\">@(ViewBag.Brand == null ? "Lector de CDFIs" : ViewBag.Brand)</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="\">Home</a>
+                        <a class="nav-link text-light" href="\">Home</a>
                     </li>
                 </ul>
             </div>
@@ -31,11 +31,6 @@
                     @if (!User.Identity.IsAuthenticated)
                     {
 
-                        <li class="nav-item">
-                            <a href="\Account\LogIn">
-                                Login <i class="fa fa-sign-in"></i>
-                            </a>
-                        </li>
                     }
                     else
                     {

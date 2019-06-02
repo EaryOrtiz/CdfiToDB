@@ -1,0 +1,113 @@
+﻿@model CDFIToDB.Models.ViewModel.CFDIViewModel
+@{
+    ViewBag.Title = "CDFI To DB";
+    Layout = "_Layout";
+}
+<div class="row" style="padding-right:20px">
+    <h2 class="col-sm-10">
+        Dashboard
+    </h2>
+</div>
+<br />
+<h3>Nomina #@Model.CDFI.CFDIID</h3>
+<div class="row">
+    <div class="col">
+        <table class="table table-sm table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Datos Generales</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Nombre de la empresa</th>
+                    <td><input class="form-control" asp-for="CDFI.NombreEmisor" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">RFC</th>
+                    <td><input class="form-control" asp-for="CDFI.RFCEmisor" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Razon Social</th>
+                    <td><input class="form-control" asp-for="CDFI.RegimenEmisor" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Nombre del Empleado</th>
+                    <td><input class="form-control" asp-for="CDFI.NombreReceptor" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">RFC</th>
+                    <td><input class="form-control" asp-for="CDFI.RFCReceptor" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">CURP</th>
+                    <td><input class="form-control" asp-for="CDFI.CURPNomina" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Lugar</th>
+                    <td><input class="form-control" asp-for="CDFI.LugarExpedicionComprobante" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fecha</th>
+                    <td><input class="form-control" asp-for="CDFI.FechaComprobante" readonly /></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">UUID</th>
+                    <td><input class="form-control" asp-for="CDFI.UUID" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Numero de certificado</th>
+                    <td><input class="form-control" asp-for="CDFI.CertificadoComprobante" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Folio</th>
+                    <td><input class="form-control" asp-for="CDFI.FolioComprobante" readonly /></td>
+                </tr>
+                <tr>
+                    <th scope="row">Sello</th>
+                    <td><input class="form-control" asp-for="CDFI.SelloComprobante" readonly /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Percepciones</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int j = 0; j < Model.Percepciones.Count(); j++)
+                {
+
+                    <tr>
+                        <th scope="row">Concepto #@(j + 1)</th>
+                        <td>Clave</td>
+                        <td>Tipo</td>
+                        <td>Importe</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control" asp-for="@Model.Percepciones[j].ConceptoPercepciones" readonly /></th>
+                        <td><input class="form-control" asp-for="@Model.Percepciones[j].ClavePercepciones" readonly /></td>
+                        <td><input class="form-control" asp-for="@Model.Percepciones[j].TipoPercepcion" readonly /></td>
+                        <td><input class="form-control" asp-for="@Model.Percepciones[j].ImporteExentoPercepciones" readonly /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<br />
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-success">
+        Regresar
+    </a>
+</div>
+
